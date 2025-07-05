@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
 const users = require("./MOCK_DATA.json");
+const fs = require("fs");
+const { json } = require("stream/consumers");
 const PORT = 3000;
+
+// middleware
+app.use(express.urlencoded({ extended: false }));
 // Routes
 // for html render
 app.get("/users", (req, res) => {
@@ -55,17 +60,38 @@ app
     res.json(user);
   })
   .patch((req, res) => {
-    // edit user with id
-    return res.json({ status: panding });
+    const id = Number(req.params.id);
+    const userId = users.find((user) => user.id === id);
+    const updateUser = req.body;
+    users[userId] = { ...users[userId], ...updateUser };
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users, null), (err) => {
+      return res.json({
+        status: "success",
+        message: "User updated",
+        user: users[userId],
+      });
+    });
   })
   .delete((req, res) => {
     // delete user with id
-    return res.json({ status: panding });
+    return res.json({ status: "panding" });
   });
 
-app.post("/api/users", (rrq, res) => {
+app.post("/api/users", (req, res) => {
   // create a new user
-  return res.json({ status: panding });
+  const body = req.body;
+  // const addUser = users.push({
+  //   id: users.length + 1,
+  //   first_name: body.first_name,
+  //   last_name: body.last_name,
+  //   email: body.email,
+  //   gender: body.gender,
+  //   job_title: body.job_title,
+  // });
+  users.push({ id: users.length + 1, ...body });
+  fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+    return res.json({ status: "success", id: users.length });
+  });
 });
 
 app.listen(PORT, () => console.log(`Server is Started at ${PORT}`));
