@@ -2,11 +2,22 @@ const express = require("express");
 const app = express();
 const users = require("./MOCK_DATA.json");
 const fs = require("fs");
-const { json } = require("stream/consumers");
 const PORT = 3000;
 
 // middleware
 app.use(express.urlencoded({ extended: false }));
+
+app.get("/api/users", (req, res, next) => {
+  // create a log file
+  fs.appendFile(
+    "log.text",
+    `${new Date().toLocaleString()}: ${req.method} ${req.path}\n`,
+    (err, data) => {
+      next();
+    }
+  );
+});
+
 // Routes
 // for html render
 app.get("/users", (req, res) => {
