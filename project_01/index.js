@@ -11,7 +11,7 @@ app.get("/api/users", (req, res, next) => {
   // create a log file
   fs.appendFile(
     "log.text",
-    `${new Date().toLocaleString()}: ${req.method} ${req.path}\n`,
+    `${new Date().toLocaleString()}: ${req.method} ${req.ip} ${req.path}\n`,
     (err, data) => {
       next();
     }
@@ -59,6 +59,9 @@ app.get("/users", (req, res) => {
 
 // get all  users
 app.get("/api/users", (req, res) => {
+  res.setHeader("X-MyHeader", "Asad Ali"); //its custom header
+  // Always add X to  custom headers its a good practice
+  console.log(req.header);
   return res.json(users);
 });
 
@@ -68,6 +71,9 @@ app
   .get((req, res) => {
     const id = Number(req.params.id);
     const user = users.find((user) => user.id === id);
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+    }
     res.json(user);
   })
   .patch((req, res) => {
@@ -91,6 +97,16 @@ app
 app.post("/api/users", (req, res) => {
   // create a new user
   const body = req.body;
+  if (
+    !body ||
+    !body.first_name ||
+    !body.last_name ||
+    !body.email ||
+    !body.gender ||
+    !body.job_title
+  ) {
+    res.status(400).json({ message: "All fields are required" });
+  }
   // const addUser = users.push({
   //   id: users.length + 1,
   //   first_name: body.first_name,
@@ -101,7 +117,7 @@ app.post("/api/users", (req, res) => {
   // });
   users.push({ id: users.length + 1, ...body });
   fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-    return res.json({ status: "success", id: users.length });
+    return res.status(201).json({ status: "success", id: users.length });
   });
 });
 
