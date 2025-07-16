@@ -1,0 +1,3 @@
+Schema --> Define the structure
+    Schema modal 
+    use this Schema modal perform crud opertions 

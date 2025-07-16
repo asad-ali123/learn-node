@@ -1,9 +1,46 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 const users = require("./MOCK_DATA.json");
 const fs = require("fs");
+const { type } = require("os");
+const { timeStamp } = require("console");
 const PORT = 3000;
 
+// connection mongodb
+mongoose
+  .connect("mongodb://127.0.0.1:27017/first-db")
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => console.log("Mongo Error", err));
+
+// schema
+const userSchema = new mongoose.Schema({
+  first_name: {
+    type: String,
+    required: true,
+  },
+  first_name: {
+    type: String,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  gender: {
+    type: String,
+  },
+  job_title: {
+    type: String,
+  },
+  
+} , {timeStamp:true});
+
+// model
+
+const User = mongoose.model("user", userSchema);
 // middleware
 app.use(express.urlencoded({ extended: false }));
 
@@ -94,7 +131,7 @@ app
     return res.json({ status: "panding" });
   });
 
-app.post("/api/users", (req, res) => {
+app.post("/api/users", async (req, res) => {
   // create a new user
   const body = req.body;
   if (
@@ -107,6 +144,7 @@ app.post("/api/users", (req, res) => {
   ) {
     res.status(400).json({ message: "All fields are required" });
   }
+
   // const addUser = users.push({
   //   id: users.length + 1,
   //   first_name: body.first_name,
@@ -115,10 +153,19 @@ app.post("/api/users", (req, res) => {
   //   gender: body.gender,
   //   job_title: body.job_title,
   // });
-  users.push({ id: users.length + 1, ...body });
-  fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-    return res.status(201).json({ status: "success", id: users.length });
+  // users.push({ id: users.length + 1, ...body });
+  // fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+  //   return res.status(201).json({ status: "success", id: users.length });
+  // });
+  await User.create({
+    first_name: body.first_name,
+    first_name: body.first_name,
+    email: body.email,
+    gender: body.gender,
+    job_title: body.job_title,
   });
+
+  res.status(201).json({ message: "User created successfuly" });
 });
 
 app.listen(PORT, () => console.log(`Server is Started at ${PORT}`));
