@@ -103,6 +103,7 @@ app.get("/api/users", (req, res) => {
 });
 
 // get single user  by id  we use this  for multiple purpose line marge these like this
+// its not working right now
 app
   .route("/api/users/:id")
   .get((req, res) => {
