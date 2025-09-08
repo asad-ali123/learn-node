@@ -1,44 +1,8 @@
-version
-
-each version have three parts like 
-
-5.1.0
-
-first part -> 5
-2nd part -> 1
-3rd part -> 0
-
-
-start from last
-
-3rd part -->  minor fixes (optional.)
-2nd part --> 5 recommended bug fix  (security fix)
-first part --> major release  major and breaking updates 
-
-now understand caret symbol (^)
-
-if add this before version then its lock the major version like 
-^5.1.0
-its lock the 5 
-when update the npm i then install all recommended and minor changes automatically 
-which is the best thing 
-^version compatible  with version
-exmple 
-^5.1.0
-5.2.0
-5.2.1
-5.3.5
-when release 6 version then not update the automatically  
-
-
-if add ~ line then lock the recommended version just update the minor changes  automatically 
-for example
-~5.1.0
-5.1.1
-5.1.2
-5.1.5
-5.1.9
-
-when release 5.2 version then not update the automatically  
-
-
+9/8/2025, 4:34:18 PM: GET / New Req Received
+9/8/2025, 4:34:19 PM: GET / New Req Received
+9/8/2025, 4:43:10 PM: GET / New Req Received
+9/8/2025, 4:43:13 PM: GET / New Req Received
+9/8/2025, 4:43:14 PM: GET / New Req Received
+9/8/2025, 4:45:09 PM: GET / New Req Received
+9/8/2025, 4:45:13 PM: GET / New Req Received
+9/8/2025, 4:45:32 PM: GET / New Req Received
