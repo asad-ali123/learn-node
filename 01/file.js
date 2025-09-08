@@ -1,5 +1,7 @@
-const fs = require("fs");
-const os = require("os");
+// const fs = require("fs");
+// const os = require("os");
+import fs from "fs";
+import os from "os"
 
 console.log(os.cpus().length);
 
@@ -13,3 +15,13 @@ console.log(os.cpus().length);
 
 // delete file
 // fs.unlinkSync('./test.js')
+
+fs.appendFile('./test.txt' , `Hello Asad!!\n ` , (err)=>{ console.log(err)})
+
+fs.readFile("./test.txt", "utf-8" , (err, result) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(result);
+  }
+});
