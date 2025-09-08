@@ -6,10 +6,11 @@ console.log("Hey! Asad");
 // 02: modules
 // Divide the code / logic into  parts
 
-// const math = require("./math");
+// const math = require("./math");  old CJS(commonJS) way to import
 
-// // console.log(math.add(1 , 1))
+import { add, sub } from "./math.js"; //new ESM ( ECMAScript Modules.)
+
 // console.log(math.add(1, 1));
 // console.log(math.sub(5, 1));
-
-console.log(global);
+console.log(add(1, 1));
+console.log(sub(5, 1));
