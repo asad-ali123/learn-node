@@ -6,8 +6,10 @@ console.log("Hey! Asad");
 // 02: modules
 // Divide the code / logic into  parts
 
-const math = require("./math");
+// const math = require("./math");
 
-// console.log(math.add(1 , 1))
-console.log(math.add(1, 1));
-console.log(math.sub(5, 1));
+// // console.log(math.add(1 , 1))
+// console.log(math.add(1, 1));
+// console.log(math.sub(5, 1));
+
+console.log(global);
