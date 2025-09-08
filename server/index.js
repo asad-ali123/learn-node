@@ -4,7 +4,7 @@ const url = require("url");
 
 const myHandler = (req, res) => {
   if (req.url === "/favicon.ico") res.end();
-  const myUrl = url.parse(req.url);
+ const myUrl = url.parse(req.url);
   const now = new Date().toLocaleString();
   const log = `${now}: ${req.method} ${req.url} New Req Received\n`;
   fs.appendFile("./log.text", log, (err, data) => {
