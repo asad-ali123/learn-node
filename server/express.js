@@ -1,7 +1,7 @@
 const express = require("express");
 
 // using express  create  handler
-const app = express();
+const app = express(); //it's works like handler fun 
 
 app.get("/", (req, res) => {
   return res.send("Hello from Home page ");
