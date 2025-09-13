@@ -58,9 +58,11 @@ app
     res.json(user ? user : "Sorry!!! This uer is not Available");
   })
   .patch((req, res) => {
+    //  update user by id
     return res.json({ status: "pending" });
   })
   .delete((req, res) => {
+    // delate user by id
     return res.json({ status: "pending" });
   });
 
