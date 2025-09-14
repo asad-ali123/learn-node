@@ -58,20 +58,39 @@ app
   })
   .patch((req, res) => {
     const id = Number(req.params.id);
-    const userId = allData.findIndex((user) => user.id === id);
+    const userindex = allData.findIndex((user) => user.id === id);
     const updateUser = req.body;
-    allData[userId] = { ...allData[userId], ...updateUser };
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(allData, null), (err) => {
-      return res.json({
-        status: "success",
-        message: "User updated",
-        user: allData[userId],
-      });
-    });
+    allData[userindex] = { ...allData[userindex], ...updateUser };
+
+    fs.writeFile(
+      "./MOCK_DATA.json",
+      JSON.stringify(allData, null, 2),
+      (err) => {
+        return res.json({
+          status: "success",
+          message: "User updated",
+          user: allData[userindex],
+        });
+      }
+    );
   })
   .delete((req, res) => {
-    // delate user by id
-    return res.json({ status: "pending" });
+    const id = Number(req.params.id);
+    const userIndex = allData.findIndex((user) => user.id === id);
+
+    const deletedUser = allData.splice(userIndex, 1)[0];
+    fs.writeFile(
+      "./MOCK_DATA.json",
+      JSON.stringify(allData, null, 2),
+      (err, data) => {
+        return res.json({
+          status: "success",
+          message: "The user is deleted successfully",
+          deletedUser: deletedUser,
+        });
+      }
+    );
+
   });
 
 app.post("/api/users", (req, res) => {
