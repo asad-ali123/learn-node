@@ -8029,37 +8029,5 @@
     "last_name": "raza",
     "gender": "Male",
     "job_title": "designer"
-  },
-  {
-    "id": 1005,
-    "first_name": "ali 123",
-    "last_name": "raza",
-    "email": "example@gmail.com ",
-    "gender": "Male",
-    "job_title": "designer"
-  },
-  {
-    "first_name": "checking",
-    "last_name": "test",
-    "email": "aa@gamil.com",
-    "gender": "male",
-    "job_title": "SE",
-    "id": 1006
-  },
-  {
-    "first_name": "Asad",
-    "last_name": "Ali",
-    "email": "asad@gmail.com",
-    "gender": "male",
-    "job_title": "Software Engineer ",
-    "id": 1007
-  },
-  {
-    "first_name": "new user 2",
-    "last_name": "test",
-    "email": "aa@gamil.com",
-    "gender": "male",
-    "job_title": "SE",
-    "id": 1008
   }
 ]
