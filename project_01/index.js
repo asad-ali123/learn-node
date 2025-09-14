@@ -16,27 +16,29 @@ mongoose
   .catch((err) => console.log("Mongo Error", err));
 
 // schema
-const userSchema = new mongoose.Schema({
-  first_name: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    first_name: {
+      type: String,
+      required: true,
+    },
+    first_name: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    gender: {
+      type: String,
+    },
+    job_title: {
+      type: String,
+    },
   },
-  first_name: {
-    type: String,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  gender: {
-    type: String,
-  },
-  job_title: {
-    type: String,
-  },
-  
-} , {timeStamp:true});
+  { timeStamp: true }
+);
 
 // model
 
@@ -128,8 +130,21 @@ app
     });
   })
   .delete((req, res) => {
-    // delete user with id
-    return res.json({ status: "panding" });
+    const id = Number(req.params.id);
+    const userIndex = allData.findIndex((user) => user.id === id);
+
+    const deletedUser = allData.splice(userIndex, 1)[0];
+    fs.writeFile(
+      "./MOCK_DATA.json",
+      JSON.stringify(allData, null, 2),
+      (err, data) => {
+        return res.json({
+          status: "success",
+          message: "The user is deleted successfully",
+          deletedUser: deletedUser,
+        });
+      }
+    );
   });
 
 app.post("/api/users", async (req, res) => {
