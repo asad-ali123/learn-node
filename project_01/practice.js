@@ -1,6 +1,6 @@
 const express = require("express");
 const allData = require("./MOCK_DATA.json");
-
+const fs = require("fs");
 const app = express();
 const PORT = 3000;
 
@@ -52,14 +52,22 @@ app
   .route("/api/users/:id")
   .get((req, res) => {
     const id = Number(req.params.id);
-    console.log(id);
     const user = allData.find((i) => i.id === id);
     console.log(user);
     res.json(user ? user : "Sorry!!! This uer is not Available");
   })
   .patch((req, res) => {
-    //  update user by id
-    return res.json({ status: "pending" });
+    const id = Number(req.params.id);
+    const userId = allData.findIndex((user) => user.id === id);
+    const updateUser = req.body;
+    allData[userId] = { ...allData[userId], ...updateUser };
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(allData, null), (err) => {
+      return res.json({
+        status: "success",
+        message: "User updated",
+        user: allData[userId],
+      });
+    });
   })
   .delete((req, res) => {
     // delate user by id
@@ -68,7 +76,12 @@ app
 
 app.post("/api/users", (req, res) => {
   console.log(req.body);
-  res.json({ status: "pending" });
+  const body = req.body;
+  allData.push({ ...body, id: allData.length + 1 });
+  fs.writeFile("./MOCK_DATA.json", JSON.stringify(allData), (err, data) => {
+    console.log(err);
+    return res.json({ status: "success", id: allData.length });
+  });
 });
 
 app.listen(PORT, () => console.log("server is started at 3000"));
