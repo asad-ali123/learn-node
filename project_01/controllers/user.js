@@ -4,7 +4,6 @@ async function handleGetAllUsers(req, res) {
   const allData = await User.find({});
   return res.json(allData);
 }
-
 async function handleGetUserById(req, res) {
   const user = await User.findById(req.params.id);
   if (!user) {
@@ -22,7 +21,6 @@ async function handleDeleteUserById(req, res) {
   await User.findByIdAndDelete(req.params.id);
   return res.json({ status: "success" });
 }
-
 async function handeCreateNewUser(req, res) {
   const body = req.body;
   if (
