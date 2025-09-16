@@ -101,3 +101,17 @@
  9/16/2025, 1:00:08 AM  ::1  /api/users/68c8691fc11535b5451b8cde PATCH
  9/16/2025, 1:00:48 AM  ::1  /api/users/68c8691fc11535b5451b8cde PATCH
  9/16/2025, 1:01:32 AM  ::1  /api/users/68c8691fc11535b5451b8cde PATCH
+ 9/16/2025, 11:42:48 PM  ::1  /api/users GET
+ 9/16/2025, 11:44:14 PM  ::1  /api/users GET
+ 9/16/2025, 11:44:24 PM  ::1  /api/users POST
+ 9/16/2025, 11:46:17 PM  ::1  /api/users POST
+ 9/16/2025, 11:46:43 PM  ::1  /api/users/68c858af8bffd04f69726700 GET
+ 9/16/2025, 11:46:51 PM  ::1  /api/users/68c858af8bffd04f69726700 GET
+ 9/16/2025, 11:47:51 PM  ::1  /api/users/68c858af8bffd04f69726700 GET
+ 9/16/2025, 11:48:22 PM  ::1  /api/users GET
+ 9/16/2025, 11:48:42 PM  ::1  /api/users/68c9b0793bc7a987476b42f4 DELETE
+ 9/16/2025, 11:49:06 PM  ::1  /api/users/68c9b0793bc7a987476b42f4 DELETE
+ 9/16/2025, 11:49:13 PM  ::1  /api/users GET
+ 9/16/2025, 11:49:28 PM  ::1  /api/users/68c8691fc11535b5451b8cde DELETE
+ 9/16/2025, 11:54:04 PM  ::1  /api/users GET
+ 9/16/2025, 11:55:16 PM  ::1  /api/users/68c858af8bffd04f69726700 GET
