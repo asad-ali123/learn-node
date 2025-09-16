@@ -9,7 +9,7 @@ async function handleGetUserById(req, res) {
   if (!user) {
     return res.status(404).json({ error: "User Not Found.." });
   }
-  return res.json(User);
+  return res.json(user);
 }
 async function handleUpdateUserById(req, res) {
   const updated = await User.findByIdAndUpdate(req.params.id, req.body, {
