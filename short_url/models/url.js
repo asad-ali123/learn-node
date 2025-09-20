@@ -2,18 +2,14 @@ import mongoose from "mongoose";
 
 const urlSchema = new mongoose.Schema(
   {
-    shortId: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    shortId: { type: String, required: true, unique: true },
     redirectUrl: {
       type: String,
       required: true,
     },
     visitHistory: [{ timestemp: { type: Number } }],
   },
-  { timestemp: true }
+  { timestamps: true }
 );
 
-export default URL = new mongoose.model("url", urlSchema);
+export default mongoose.model("URL", urlSchema);

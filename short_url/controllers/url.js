@@ -15,7 +15,7 @@ export async function handelGenerateShortUrl(req, res) {
     visitHistory: [],
   });
 
-  return res.json({ shortID: shortId, saved: newUrl });
+  return res.json({ shortId: shortId, saved: newUrl });
 }
 
 export async function handleGetAllUrl(req, res) {
@@ -25,6 +25,23 @@ export async function handleGetAllUrl(req, res) {
 
 export async function handleGetUrlAndUpdate(req, res) {
   const shortId = req.params.shortId;
-  await URL.findOneAndUpdate(shortId)
+  const entry = await URL.findOneAndUpdate(
+    { shortId },
+    {
+      $push: {
+        // visitHistory: { timestemp: Date.now().toLocaleString() },
+        visitHistory: { timestemp: Date.now() },
+      },
+    }
+  );
+  res.redirect(entry.redirectUrl);
+}
 
+export async function handleGetAnalytic(req, res) {
+  const shortId = req.params.id;
+  const result = await URL.findOne(shortId);
+  res.json({
+    TotalClicks: result.visitHistory.length,
+    Analytics: result.visitHistory,
+  });
 }
