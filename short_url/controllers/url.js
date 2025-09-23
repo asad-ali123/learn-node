@@ -39,7 +39,7 @@ export async function handleGetUrlAndUpdate(req, res) {
 
 export async function handleGetAnalytic(req, res) {
   const shortId = req.params.id;
-  const result = await URL.findOne({ shortId: shortId });
+  const result = await URL.findOne({ shortId });
   res.json({
     TotalClicks: result.visitHistory.length,
     Analytics: result.visitHistory,

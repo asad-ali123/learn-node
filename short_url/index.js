@@ -1,12 +1,15 @@
 import express from "express";
 import urlRouter from "./routes/url.js";
 import connectToMongoDB from "./connectDB.js";
+import path from "path";
 const app = express();
 const PORT = 3000;
 
 connectToMongoDB("mongodb://127.0.0.1:27017/short-url").then(() =>
   console.log("MongoDB connected")
 );
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views"));
 app.use(express.json());
 
 app.use("/url", urlRouter);
