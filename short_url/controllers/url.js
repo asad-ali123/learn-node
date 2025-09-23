@@ -4,18 +4,20 @@ import URL from "../models/url.js";
 export async function handelGenerateShortUrl(req, res) {
   const shortId = nanoid(8);
   const body = req.body;
+
   if (!body.url)
     return res
       .status(400)
       .json({ error: "Url is required! please Add url...." });
-
+  console.log(body.url);
   const newUrl = await URL.create({
     shortId: shortId,
     redirectUrl: body.url,
     visitHistory: [],
   });
 
-  return res.json({ shortId: shortId, saved: newUrl });
+  // return res.json({ shortId: shortId, saved: newUrl });
+  return res.render("home", { Id: shortId });
 }
 
 export async function handleGetAllUrl(req, res) {
