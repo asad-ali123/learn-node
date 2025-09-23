@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>URL Shortener</title>
 </head>
+
 <body>
-    <h1>Hey from ejs </h1>
+    <h1>URL Shortener</h1>
+
+    <!-- Form for entering URL -->
+    <form action="/url" method="POST">
+        <% if (locals?.Id) { %>
+            <p>URL Generated : http://localhost:3000/url/<%= Id %>
+            </p>
+            <% } %>
+
+                <div style="display: inline-flex; flex-direction: column; gap: 10px;">
+
+                    <label for="url">Enter Your Orignal URL</label>
+                    <div class="">
+                        <input type="text" name="url" placeholder="Enter your long URL here..." required
+                            style="width: 300px; padding: 8px;" />
+
+                        <button type="submit" style="padding: 8px 12px;">Shorten</button>
+                    </div>
+                </div>
+
+
+    </form>
+
+    <hr />
+
+
 </body>
+
 </html>
