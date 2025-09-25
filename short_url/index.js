@@ -1,5 +1,6 @@
 import express from "express";
-import urlRouter from "./routes/url.js";
+import urlRoute from "./routes/url.js";
+import userRoute from "./routes/user.js";
 import staticRoute from "./routes/staticRouter.js";
 import connectToMongoDB from "./connectDB.js";
 import path from "path";
@@ -16,12 +17,13 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-app.use("/", staticRoute);
 app.get("/test", async (req, res) => {
   const allUrls = await URL.find({});
   console.log(allUrls);
   return res.render("home", { urls: allUrls });
 });
 
-app.use("/url", urlRouter);
+app.use("/url", urlRoute); //for short url
+app.use("/", staticRoute); //for static route
+app.use("/user", userRoute); // for user
 app.listen(PORT, () => console.log(`Server is Started at Port ${PORT}`));

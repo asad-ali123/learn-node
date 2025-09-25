@@ -28,5 +28,39 @@
                 </div>
     </form>
     <hr />
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>S. No</th>
+                <th>ShortID</th>
+                <th>Redirect</th>
+                <th>Clicks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% urls?.forEach((url, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= url.shortId %>
+                            <a href="http://localhost:3000/url/<%=url.shortId  %>" target="_blank">Click me</a>
+                    </td>
+                    <td>
+                        <a href="<%= url.redirectUrl %>" target="_blank">
+                            <%= url.redirectUrl %>
+                        </a>
+                    </td>
+                    <td>
+                        <%= url.visitHistory.length || 0 %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
 </body>
+
 </html>

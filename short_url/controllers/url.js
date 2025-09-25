@@ -9,7 +9,6 @@ export async function handelGenerateShortUrl(req, res) {
     return res
       .status(400)
       .json({ error: "Url is required! please Add url...." });
-  console.log(body.url);
   const newUrl = await URL.create({
     shortId: shortId,
     redirectUrl: body.url,
@@ -17,7 +16,8 @@ export async function handelGenerateShortUrl(req, res) {
   });
 
   // return res.json({ shortId: shortId, saved: newUrl });
-  return res.render("home", { Id: shortId });
+  const allUrls = await URL.find({});
+  return res.render("home", { Id: shortId, urls: allUrls });
 }
 
 export async function handleGetAllUrl(req, res) {
