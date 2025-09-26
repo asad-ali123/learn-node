@@ -1,6 +1,6 @@
 import User from "../models/user.js";
 
-export default async function handleUserSignup(req, res) {
+export  async function handleUserSignup(req, res) {
   const { firstName, lastName, email, password } = req.body;
 
   if (!firstName || !email || !password) {
@@ -17,4 +17,10 @@ export default async function handleUserSignup(req, res) {
 
   // return res.json({ user: newUser });
   return res.redirect("/");
+}
+
+export  async function handleGetAllUser(req , res) {
+  const allUsers = await User.find({})
+  return res.json(allUsers)
+  
 }
