@@ -1,6 +1,10 @@
 import User from "../models/user.js";
-
-export  async function handleUserSignup(req, res) {
+import { v4 as uuidv4 } from "uuid";
+export async function handleGetAllUser(req, res) {
+  const allUsers = await User.find({});
+  return res.json(allUsers);
+}
+export async function handleUserSignup(req, res) {
   const { firstName, lastName, email, password } = req.body;
 
   if (!firstName || !email || !password) {
@@ -19,8 +23,12 @@ export  async function handleUserSignup(req, res) {
   return res.redirect("/");
 }
 
-export  async function handleGetAllUser(req , res) {
-  const allUsers = await User.find({})
-  return res.json(allUsers)
-  
+export async function handleUserLogin(req, res) {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email, password });
+  if (!user)
+    return res.render("login", { error: "Invalid email and password" });
+  const sessionId = uuidv4();
+  res.cookie.set("uid", sessionId);
+  return res.redirect("/");
 }
