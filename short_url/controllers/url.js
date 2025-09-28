@@ -13,6 +13,7 @@ export async function handelGenerateShortUrl(req, res) {
     shortId: shortId,
     redirectUrl: body.url,
     visitHistory: [],
+    createdBy: req.user?._id,
   });
 
   // return res.json({ shortId: shortId, saved: newUrl });
