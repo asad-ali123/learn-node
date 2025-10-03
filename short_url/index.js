@@ -27,6 +27,6 @@ app.get("/test", async (req, res) => {
 });
 
 app.use("/url", restrictToLoggedInUserOnly, urlRoute); //for short-Url
-app.use("/", restrictToLoggedInUserOnly, staticRoute); //for static route
+app.use("/", staticRoute); //for static route
 app.use("/user", userRoute); // for user
 app.listen(PORT, () => console.log(`Server is Started at Port ${PORT}`));
