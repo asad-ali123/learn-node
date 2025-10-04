@@ -6,7 +6,7 @@ export async function handleGetAllUser(req, res) {
   return res.json(allUsers);
 }
 export async function handleUserSignup(req, res) {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
 
   if (!firstName || !email || !password) {
     return res
@@ -18,6 +18,7 @@ export async function handleUserSignup(req, res) {
     lastName,
     email,
     password,
+    role: role || "NORMAL",
   });
 
   // return res.json({ user: newUser });
@@ -34,7 +35,7 @@ export async function handleUserLogin(req, res) {
 
   const token = setUser(user);
 
-  // res.cookie("uid", token);
+  res.cookie("token", token);
   // res.json({ token: token });
-  return res.json({ token: token });
+  return res.redirect("/");
 }
